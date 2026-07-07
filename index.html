@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Senior Genius Bar | Friendly Tech Help for Atria Residents</title>
+<meta name="description" content="Friendly technology help for Atria residents and simple senior-friendly tech guides." />
+
+<style>
+/* =========================================================
+   SENIOR GENIUS BAR WEBSITE — STYLES
+   You should not need to touch anything in this <style> block.
+   All the things you actually update live near the top of the
+   page body, inside the box that says "UPDATE HERE".
+   ========================================================= */
+
+:root {
+  /* ---- High-contrast, senior-friendly palette ---- */
+  --cream: #fbf7ee;       /* soft, non-glaring background */
+  --paper: #ffffff;       /* card background */
+  --ink: #1b1b1b;         /* near-black text = maximum readability */
+  --muted: #4d4a44;       /* secondary text, still high contrast */
+  --teal: #0b4f6c;        /* primary brand color: headers, nav, links */
+  --teal-dark: #06344a;
+  --amber: #c98a2c;       /* warm accent: buttons, highlights */
+  --amber-dark: #9c6b1f;
+  --sage: #3f6b4f;        /* calm green: "for residents" badge */
+  --alert: #9b2c2c;       /* safety/warning box */
+  --box-border: #d8cbae;  /* warm neutral border for boxed sections */
+  --sky: #e4f0f6;         /* light section tint */
+  --sky-border: #b9d3e0;
+  --font-scale: 1;
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+}
+
+body {
+  margin: 0;
+  font-family: Verdana, Tahoma, Arial, sans-serif;
+  background: var(--cream);
+  color: var(--ink);
+  font-size: calc(18px * var(--font-scale));
+  line-height: 1.65;
+}
+
+h1, h2, h3 { font-family: Georgia, "Times New Roman", serif; font-weight: 700; }
+
+a { color: var(--teal); font-weight: 700; }
+a:focus, button:focus, summary:focus { outline: 3px solid var(--amber); outline-offset: 3px; }
+
+/* ---- Accessibility bar (text size controls) ---- */
+.accessibility-bar {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  background: var(--teal-dark);
+  border-bottom: 3px solid var(--amber);
+  padding: 10px 16px;
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.accessibility-bar span { font-weight: 700; color: #fff; }
+
+.small-button {
+  background: #ffffff;
+  color: var(--teal-dark);
+  border: 2px solid #ffffff;
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-weight: 700;
+  cursor: pointer;
+  font-size: 16px;
+}
+.small-button:hover { background: var(--amber); color: #fff; border-color: var(--amber); }
+
+/* ---- Top banner ---- */
+.top-bar {
+  background: var(--teal);
+  color: white;
+  padding: 26px 20px 20px;
+  text-align: center;
+  border-bottom: 6px solid var(--amber);
+}
+
+.top-bar h1 { margin: 0; font-size: clamp(34px, 6vw, 62px); font-weight: 700; letter-spacing: .5px; }
+.top-bar p.tagline { margin: 8px 0 0; color: #dcebf2; font-size: calc(19px * var(--font-scale)); font-family: Verdana, Arial, sans-serif; }
+
+/* ---- Nav ---- */
+.nav {
+  position: sticky;
+  top: 57px;
+  z-index: 25;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--teal-dark);
+  padding: 12px;
+  border-bottom: 3px solid var(--amber);
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-size: calc(17px * var(--font-scale));
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  border: 2px solid transparent;
+}
+
+.nav a:hover, .nav a:focus { background: var(--amber); border-color: var(--amber); }
+
+.container { width: min(1080px, 92%); margin: 0 auto; }
+
+/* ---- Hero ---- */
+.hero {
+  display: grid;
+  grid-template-columns: 1.4fr .8fr;
+  gap: 30px;
+  align-items: center;
+  padding: 46px 0 30px;
+}
+
+.hero h2 { font-size: clamp(30px, 4vw, 46px); line-height: 1.2; margin: 0 0 14px; color: var(--teal); }
+.hero p { font-size: calc(22px * var(--font-scale)); margin: 0 0 20px; font-family: Verdana, Arial, sans-serif; }
+
+.badge {
+  display: inline-block;
+  background: var(--sage);
+  border: 2px solid var(--teal-dark);
+  border-radius: 999px;
+  padding: 8px 16px;
+  font-weight: 700;
+  color: white;
+  margin-bottom: 16px;
+}
+
+.photo-card {
+  background: white;
+  border: 6px solid var(--amber);
+  border-radius: 26px;
+  padding: 10px;
+  box-shadow: 0 10px 24px rgba(0,0,0,.2);
+  max-width: 330px;
+  margin: 0 auto;
+}
+
+.photo-card img { width: 100%; display: block; border-radius: 18px; aspect-ratio: 1/1; object-fit: cover; }
+
+.photo-fallback {
+  width: 100%;
+  aspect-ratio: 1/1;
+  border-radius: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, var(--teal), var(--teal-dark));
+  color: white;
+  font-size: 64px;
+  font-weight: 700;
+  font-family: Georgia, serif;
+}
+
+.button-row { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 20px; }
+
+.button {
+  display: inline-block;
+  background: var(--teal);
+  color: white;
+  padding: 15px 22px;
+  border-radius: 12px;
+  text-decoration: none;
+  font-weight: 700;
+  border: 2px solid var(--teal);
+  cursor: pointer;
+  font-size: calc(17px * var(--font-scale));
+  font-family: Verdana, Arial, sans-serif;
+}
+.button:hover { background: var(--teal-dark); border-color: var(--teal-dark); }
+
+.button.secondary { background: white; color: var(--teal); border: 2px solid var(--teal); }
+.button.secondary:hover { background: var(--sky); }
+
+.button.gold { background: var(--amber); color: white; border: 2px solid var(--amber); }
+.button.gold:hover { background: var(--amber-dark); border-color: var(--amber-dark); }
+
+/* ---- Section dividers (signature element) ----
+   A horizontal rule with a centered circular badge, used between
+   major sections so it's always obvious where one topic ends and
+   the next begins — like a marker between chapters. */
+.section-divider {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  max-width: 1080px;
+  width: 92%;
+  margin: 0 auto;
+  padding: 6px 0;
+}
+.section-divider::before,
+.section-divider::after {
+  content: "";
+  flex: 1;
+  height: 3px;
+  background: var(--box-border);
+  border-radius: 2px;
+}
+.section-divider .divider-dot {
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  background: var(--teal);
+  border: 3px solid var(--amber);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.section-divider .divider-dot svg { width: 24px; height: 24px; }
+
+section { padding: 30px 0; }
+
+/* ---- Boxed sections ---- */
+.section-box {
+  background: var(--paper);
+  border: 3px solid var(--box-border);
+  border-radius: 22px;
+  padding: 28px 26px;
+  box-shadow: 0 6px 18px rgba(27,27,27,.07);
+}
+
+.section-box.tint-sky { background: var(--sky); border-color: var(--sky-border); }
+.section-box.tint-amber { background: #fdf3e2; border-color: var(--amber); }
+.section-box.tint-alert { background: #fbecec; border-color: var(--alert); border-left-width: 10px; }
+
+.section-title {
+  font-size: clamp(28px, 4vw, 38px);
+  margin: 0 0 8px;
+  color: var(--teal);
+  text-align: center;
+  line-height: 1.2;
+}
+.section-sub {
+  text-align: center;
+  color: var(--muted);
+  margin: 0 0 20px;
+  font-size: calc(18px * var(--font-scale));
+  font-family: Verdana, Arial, sans-serif;
+}
+
+.atria-only {
+  display: inline-block;
+  color: white;
+  background: var(--sage);
+  border-radius: 999px;
+  padding: 7px 14px;
+  font-weight: 700;
+  font-size: 16px;
+  margin-bottom: 12px;
+  border: 2px solid var(--teal-dark);
+}
+
+.session-list { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 16px; }
+
+.session-item {
+  background: white;
+  border-radius: 16px;
+  padding: 18px;
+  border: 2px solid var(--amber);
+}
+.session-item strong { display: block; font-size: calc(22px * var(--font-scale)); color: var(--teal); font-family: Georgia, serif; }
+.session-empty { color: var(--muted); font-style: italic; }
+
+.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+
+.help-card {
+  background: white;
+  border-radius: 18px;
+  padding: 20px;
+  border: 2px solid var(--sky-border);
+}
+.help-card h3 { margin: 0 0 8px; color: var(--teal); font-size: calc(23px * var(--font-scale)); }
+.help-card p { margin: 0; font-family: Verdana, Arial, sans-serif; }
+
+.steps li, .guide li { margin-bottom: 10px; }
+
+details {
+  background: white;
+  border: 2px solid var(--sky-border);
+  border-radius: 18px;
+  padding: 16px 20px;
+  margin-bottom: 14px;
+}
+
+summary { cursor: pointer; font-weight: 700; color: var(--teal); font-size: calc(21px * var(--font-scale)); font-family: Georgia, serif; }
+
+.guide-actions { margin-top: 12px; }
+
+.note {
+  background: var(--sky);
+  border-left: 6px solid var(--sky-border);
+  padding: 16px 18px;
+  border-radius: 12px;
+  color: var(--ink);
+  font-family: Verdana, Arial, sans-serif;
+}
+
+footer {
+  background: var(--teal-dark);
+  color: white;
+  text-align: center;
+  padding: 30px 18px;
+  margin-top: 10px;
+  border-top: 6px solid var(--amber);
+}
+footer a { color: #fff; text-decoration: underline; }
+footer p { margin: 4px 0; font-family: Verdana, Arial, sans-serif; }
+
+/* ---- Guide icon badges ---- */
+.icon-badge {
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--sky);
+  border: 2px solid var(--sky-border);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.icon-badge svg { width: 38px; height: 38px; }
+
+.guide-summary-row { display: flex; align-items: center; gap: 14px; }
+.guide-summary-row .icon-badge { width: 46px; height: 46px; }
+.guide-summary-row .icon-badge svg { width: 27px; height: 27px; }
+
+/* ---- Step-by-step picture modal ---- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(11, 25, 35, 0.8);
+  z-index: 100;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+.modal-overlay.open { display: flex; }
+
+.modal-box {
+  background: var(--cream);
+  border-radius: 24px;
+  max-width: 640px;
+  width: 100%;
+  max-height: 92vh;
+  overflow-y: auto;
+  padding: 28px;
+  box-shadow: 0 20px 50px rgba(0,0,0,.4);
+  position: relative;
+  border: 4px solid var(--amber);
+}
+
+.modal-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: white;
+  border: 2px solid var(--teal);
+  color: var(--teal);
+  width: 46px;
+  height: 46px;
+  border-radius: 999px;
+  font-size: 22px;
+  font-weight: 700;
+  cursor: pointer;
+  line-height: 1;
+}
+.modal-close:hover { background: var(--sky); }
+
+.modal-step-count {
+  text-align: center;
+  color: var(--muted);
+  font-weight: 700;
+  margin-bottom: 6px;
+  font-size: calc(16px * var(--font-scale));
+  font-family: Verdana, Arial, sans-serif;
+}
+
+.modal-icon-big {
+  width: 150px;
+  height: 150px;
+  margin: 6px auto 18px;
+  border-radius: 28px;
+  background: var(--sky);
+  border: 3px solid var(--sky-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal-icon-big svg { width: 90px; height: 90px; }
+
+.modal-box h3 {
+  text-align: center;
+  color: var(--teal);
+  font-size: clamp(24px, 5vw, 32px);
+  margin: 0 0 14px;
+}
+
+.modal-box p.modal-text {
+  text-align: center;
+  font-size: calc(22px * var(--font-scale));
+  margin: 0 0 22px;
+  font-family: Verdana, Arial, sans-serif;
+}
+
+.modal-dots { display: flex; justify-content: center; gap: 8px; margin-bottom: 20px; }
+.modal-dots span { width: 11px; height: 11px; border-radius: 999px; background: var(--sky-border); }
+.modal-dots span.active { background: var(--teal); }
+
+.modal-nav-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.modal-nav-row .button { min-width: 130px; text-align: center; font-size: calc(19px * var(--font-scale)); padding: 16px 22px; }
+
+@media print {
+  .nav, .accessibility-bar, .button-row, .modal-overlay, .section-divider { display: none; }
+  body { background: white; font-size: 12pt; }
+  .section-box, details { box-shadow: none; border: 1px solid #999; }
+}
+
+@media (max-width: 760px) {
+  .hero { grid-template-columns: 1fr; text-align: center; }
+  .button-row { justify-content: center; }
+  body { font-size: calc(17px * var(--font-scale)); }
+  .nav { top: 0; }
+  .section-box { padding: 22px 18px; }
+}
+</style>
+</head>
+<body>
+
+<!-- =========================================================
+     ✏️  UPDATE HERE  —  THIS IS THE ONLY PART YOU NEED TO EDIT
+     =========================================================
+     Aiden, everything you need to change (dates, times, room,
+     email) lives in the box below. You should not need to touch
+     anything else in this file.
+
+     HOW TO CHANGE SOMETHING:
+     1. On GitHub, open index.html and click the pencil (edit) icon.
+     2. Find the words you want to change, between the quote marks " ".
+     3. Only change the text INSIDE the quote marks. Do not delete
+        the quote marks, commas, or curly brackets { }.
+     4. Scroll down, click "Commit changes" to save.
+     5. Wait about 1 minute, then reload the website to see it live.
+        (If your photo or updates don't show up right away, that's
+        normal — GitHub Pages takes a minute to publish. Do a hard
+        refresh: Ctrl+Shift+R on a computer, or close and reopen the
+        page on a phone.)
+     ========================================================= -->
+<script>
+  // 1) Who can use this program? (shown as a small badge on the page)
+  const PROGRAM_STATUS = "For Atria residents only";
+
+  // 2) Where do sessions happen?
+  const PROGRAM_LOCATION = "The Parlor";
+
+  // 3) Upcoming sessions. Each line is one session: a date and a time.
+  //    - To ADD a session: copy a whole line (the part starting with
+  //      "{" and ending with "},") and paste it, then change the words.
+  //    - To REMOVE a session: delete its whole line.
+  //    - Leave the empty list ( [] ) below if there are no sessions
+  //      scheduled right now — the page will say "New dates coming soon."
+  const NEXT_SESSIONS = [
+    { date: "Saturday, July 11", time: "1:00 PM – 1:30 PM" },
+    { date: "Saturday, July 18", time: "1:00 PM – 1:30 PM" }
+  ];
+
+  // 4) Contact email for help requests between sessions.
+  const CONTACT_EMAIL = "seniorgeniusbar@gmail.com";
+
+  // ---- You do not need to edit anything below this line. ----
+  const REQUEST_HELP_LINK = "mailto:" + CONTACT_EMAIL
+    + "?subject=Senior%20Genius%20Bar%20Help%20Request"
+    + "&body=Name:%0AResident%20or%20Family%20Member:%0ADevice:%0AWhat%20do%20you%20need%20help%20with:%0APreferred%20date/time:%0A";
+</script>
+
+<div class="accessibility-bar" aria-label="Text size controls">
+  <span>Text size:</span>
+  <button class="small-button" onclick="changeTextSize(-1)">A− Smaller</button>
+  <button class="small-button" onclick="changeTextSize(1)">A+ Bigger</button>
+  <button class="small-button" onclick="resetTextSize()">Reset</button>
+</div>
+
+<header>
+  <div class="top-bar">
+    <h1>Senior Genius Bar</h1>
+    <p class="tagline">Friendly, patient, one-on-one tech help.</p>
+  </div>
+  <nav class="nav" aria-label="Main navigation">
+    <a href="#sessions">Next Sessions</a>
+    <a href="#help">How I Can Help</a>
+    <a href="#guides">Picture Guides</a>
+    <a href="#remote">Request Help</a>
+    <a href="#safety">Safety</a>
+    <a href="#about">About Aiden</a>
+  </nav>
+</header>
+
+<main>
+  <div class="container">
+    <section class="hero">
+      <div>
+        <span class="badge" id="programStatus">For Atria residents only</span>
+        <h2>Friendly tech help for phones, tablets, and computers.</h2>
+        <p>Bring your device or just bring your questions. I can help with texting, video calls, photos, email, passwords, settings, and basic troubleshooting.</p>
+        <div class="button-row">
+          <a class="button" href="#sessions">See Next Sessions</a>
+          <a class="button secondary" id="requestButtonTop" href="#remote">Request Help Between Visits</a>
+        </div>
+      </div>
+      <div class="photo-card">
+        <img id="aidenPhoto" src="aiden.png" alt="Aiden O'Neill smiling" onerror="showPhotoFallback()" />
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="sun"></div>
+
+    <section id="sessions">
+      <div class="section-box tint-amber">
+        <div class="atria-only" id="programStatus2">For Atria residents only</div>
+        <h2 class="section-title">Next Help Sessions</h2>
+        <p style="text-align:center;"><strong>Location:</strong> <span id="sessionLocation">The Parlor</span></p>
+        <div class="session-list" id="sessionList"></div>
+        <p style="text-align:center;"><strong>Bring:</strong> your phone, tablet, laptop, charger, and any questions.</p>
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="gear"></div>
+
+    <section id="help">
+      <div class="section-box tint-sky">
+        <h2 class="section-title">How I Can Help</h2>
+        <div class="grid">
+          <div class="help-card">
+            <h3>Stay Connected</h3>
+            <p>Video calls, texting, email, and contacts.</p>
+          </div>
+          <div class="help-card">
+            <h3>Photos & Memories</h3>
+            <p>View, save, organize, and share photos with family.</p>
+          </div>
+          <div class="help-card">
+            <h3>See & Hear Better</h3>
+            <p>Make text larger, screens brighter, and sound easier to hear.</p>
+          </div>
+          <div class="help-card">
+            <h3>Fix Frustrations</h3>
+            <p>Clean up notifications, organize apps, connect to Wi‑Fi, and solve basic issues.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="message"></div>
+
+    <section id="guides">
+      <div class="section-box">
+        <h2 class="section-title">Simple Picture Guides</h2>
+        <p class="section-sub">Tap "View Big Step-by-Step Pictures" on any guide below to see large, easy-to-follow steps one at a time.</p>
+        <div id="guideList"></div>
+        <div class="note" style="margin-top:6px;">Don't see your question here? You can always <a href="#remote">request help</a> and Aiden will get back to you.</div>
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="video"></div>
+
+    <section id="remote">
+      <div class="section-box tint-sky">
+        <h2 class="section-title">Request Help Between Visits</h2>
+        <p style="text-align:center;"><strong>This support is currently for Atria residents and their families only.</strong></p>
+        <p style="text-align:center;">If you need help before the next in-person session, you can send a request. Aiden will reply when he is available.</p>
+        <ol class="steps">
+          <li>Tell Aiden your name and whether you are a resident or family member.</li>
+          <li>Tell him what device you need help with.</li>
+          <li>Briefly describe the problem or question.</li>
+          <li>Do not include passwords, banking information, medical information, or private account details.</li>
+        </ol>
+        <div class="button-row" style="justify-content:center;">
+          <a class="button" id="requestButton" href="#">Request Help by Email</a>
+          <a class="button secondary" href="#guides">View Simple Tech Guides</a>
+        </div>
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="shield"></div>
+
+    <section id="safety">
+      <div class="section-box tint-alert">
+        <h2 class="section-title" style="color:var(--alert);">Important Safety Notes</h2>
+        <ul>
+          <li>Aiden will never ask for your passwords.</li>
+          <li>Please do not share banking, medical, Social Security, or private account information.</li>
+          <li>This is basic technology help, not emergency, medical, financial, or legal advice.</li>
+          <li>If something seems urgent or unsafe, please ask Atria staff or a trusted family member for help.</li>
+        </ul>
+      </div>
+    </section>
+
+    <div class="section-divider" data-icon="folder"></div>
+
+    <section id="about">
+      <div class="section-box tint-sky">
+        <h2 class="section-title">About Aiden</h2>
+        <p>Hi, I'm Aiden O'Neill. I'm a local high school student who started Senior Genius Bar to help seniors feel more confident using technology.</p>
+        <p>I like helping people break confusing tech problems into simple steps. My goal is to help residents stay connected to family, friends, and the moments that matter most.</p>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <p><strong>Senior Genius Bar</strong></p>
+  <p>Helping seniors stay connected to the people and moments that matter most.</p>
+  <p id="contactLine"></p>
+</footer>
+
+<!-- Step-by-step picture modal (shared by all guides) -->
+<div class="modal-overlay" id="stepModal" role="dialog" aria-modal="true" aria-labelledby="modalGuideTitle">
+  <div class="modal-box">
+    <button class="modal-close" id="modalCloseBtn" aria-label="Close">✕</button>
+    <div class="modal-step-count" id="modalStepCount"></div>
+    <div class="modal-icon-big" id="modalIconBig"></div>
+    <h3 id="modalGuideTitle"></h3>
+    <p class="modal-text" id="modalStepText"></p>
+    <div class="modal-dots" id="modalDots"></div>
+    <div class="modal-nav-row">
+      <button class="button secondary" id="modalBackBtn">◀ Back</button>
+      <button class="button gold" id="modalNextBtn">Next ▶</button>
+      <button class="button" id="modalDoneBtn" style="display:none;">Done ✓</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* =========================================================
+   Text-size buttons (accessibility bar)
+   ========================================================= */
+let fontStep = Number(localStorage.getItem("fontStep") || 0);
+
+function applyTextSize() {
+  const scale = 1 + (fontStep * 0.12);
+  document.documentElement.style.setProperty("--font-scale", scale);
+  localStorage.setItem("fontStep", fontStep);
+}
+function changeTextSize(direction) {
+  fontStep = Math.max(0, Math.min(4, fontStep + direction));
+  applyTextSize();
+}
+function resetTextSize() { fontStep = 0; applyTextSize(); }
+applyTextSize();
+
+/* =========================================================
+   Simple original icon set (small SVGs) used by dividers and guides.
+   These are plain generic icons, not screenshots of any app.
+   ========================================================= */
+const ICONS = {
+  gear: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 15.5a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Z"/><path d="M19.4 13.5a7.6 7.6 0 0 0 .1-1.5 7.6 7.6 0 0 0-.1-1.5l2-1.6-2-3.4-2.4 1a7.7 7.7 0 0 0-2.6-1.5L14 2.5h-4l-.4 2.5a7.7 7.7 0 0 0-2.6 1.5l-2.4-1-2 3.4 2 1.6a7.6 7.6 0 0 0 0 3l-2 1.6 2 3.4 2.4-1c.8.7 1.7 1.2 2.6 1.5l.4 2.5h4l.4-2.5a7.7 7.7 0 0 0 2.6-1.5l2.4 1 2-3.4-2-1.6Z"/></svg>`,
+  sun: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M4.2 4.2l1.8 1.8M18 18l1.8 1.8M2 12h2.5M19.5 12H22M4.2 19.8 6 18M18 6l1.8-1.8"/></svg>`,
+  wifi: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 8.5a14.5 14.5 0 0 1 19 0"/><path d="M5.7 12a10 10 0 0 1 12.6 0"/><path d="M9 15.4a5.3 5.3 0 0 1 6 0"/><circle cx="12" cy="19" r="1.1" fill="currentColor" stroke="none"/></svg>`,
+  message: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 5.5h18v11H8l-5 4.5V5.5Z"/><path d="M7 10h10M7 13.3h6"/></svg>`,
+  video: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="6" width="13" height="12" rx="2.2"/><path d="M15.5 10.2 21 7v10l-5.5-3.2"/></svg>`,
+  camera: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 8h3.2L9 5.5h6L16.8 8H20a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V9a1 1 0 0 1 1-1Z"/><circle cx="12" cy="13" r="3.4"/></svg>`,
+  mail: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5.5" width="18" height="13" rx="2"/><path d="m4 7 8 6 8-6"/></svg>`,
+  shield: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 2.7 20 6v6c0 5-3.4 8.4-8 9.3-4.6-.9-8-4.3-8-9.3V6l8-3.3Z"/><path d="m8.5 12 2.4 2.4L16 9.3"/></svg>`,
+  power: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 3v8"/><path d="M7 6.3a7.5 7.5 0 1 0 10 0"/></svg>`,
+  folder: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M3 6.5a1 1 0 0 1 1-1h5l2 2.2H20a1 1 0 0 1 1 1V18a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V6.5Z"/></svg>`,
+  speaker: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 9.5h3.5L13 5.5v13L7.5 14.5H4v-5Z"/><path d="M17 8.3a5.2 5.2 0 0 1 0 7.4M19.3 6a8.6 8.6 0 0 1 0 12"/></svg>`
+};
+
+/* Fill in the little icon inside each section divider circle */
+document.querySelectorAll(".section-divider").forEach(div => {
+  const iconKey = div.dataset.icon;
+  const dot = document.createElement("span");
+  dot.className = "divider-dot";
+  dot.style.color = "#ffffff";
+  dot.innerHTML = iconKey ? ICONS[iconKey] : ICONS.sun;
+  div.innerHTML = "";
+  div.appendChild(dot);
+});
+
+/* =========================================================
+   Fill in program status, location, sessions, contact
+   ========================================================= */
+document.getElementById("programStatus").textContent = PROGRAM_STATUS;
+document.getElementById("programStatus2").textContent = PROGRAM_STATUS;
+document.getElementById("sessionLocation").textContent = PROGRAM_LOCATION;
+
+const sessionList = document.getElementById("sessionList");
+if (NEXT_SESSIONS.length === 0) {
+  sessionList.innerHTML = `<p class="session-empty">New dates coming soon — please check back or request help below.</p>`;
+} else {
+  sessionList.innerHTML = NEXT_SESSIONS.map(session => `
+    <div class="session-item">
+      <strong>${session.date}</strong>
+      <span>${session.time}</span>
+    </div>
+  `).join("");
+}
+
+document.getElementById("requestButton").href = REQUEST_HELP_LINK;
+document.getElementById("requestButtonTop").href = "#remote";
+
+const contactParts = [];
+if (CONTACT_EMAIL) contactParts.push(`<a href="mailto:${CONTACT_EMAIL}">${CONTACT_EMAIL}</a>`);
+document.getElementById("contactLine").innerHTML = contactParts.join(" • ");
+
+/* =========================================================
+   Photo fallback — if aiden.png doesn't load for any reason,
+   show a friendly placeholder instead of a broken image icon.
+   ========================================================= */
+function showPhotoFallback() {
+  const img = document.getElementById("aidenPhoto");
+  if (!img) return;
+  const fallback = document.createElement("div");
+  fallback.className = "photo-fallback";
+  fallback.textContent = "AO";
+  img.replaceWith(fallback);
+}
+
+/* =========================================================
+   ✏️  UPDATE HERE (OPTIONAL) — Picture Guide Content
+   =========================================================
+   Want to add or change a tech guide? Each guide below has:
+     - an id, a title, and an icon (pick from the ICONS list above)
+     - a list of "steps" — each step has an icon and short text
+
+   To add a new guide, copy one whole guide block (from the { to
+   the matching },) and edit the words inside the quotes.
+   ========================================================= */
+const GUIDES = [
+  {
+    id: "text-size-iphone",
+    title: "Make Text Bigger on an iPhone",
+    icon: "gear",
+    steps: [
+      { icon: "gear", text: "Open the Settings app on your Home Screen." },
+      { icon: "gear", text: "Tap \u201cDisplay & Brightness.\u201d" },
+      { icon: "gear", text: "Tap \u201cText Size.\u201d" },
+      { icon: "gear", text: "Slide your finger along the bar to make the text bigger." },
+      { icon: "gear", text: "For even bigger text, go to Settings > Accessibility > Display & Text Size." }
+    ]
+  },
+  {
+    id: "text-size-android",
+    title: "Make Text Bigger on an Android Phone",
+    icon: "gear",
+    steps: [
+      { icon: "gear", text: "Open the Settings app." },
+      { icon: "gear", text: "Tap \u201cDisplay\u201d (on some phones this is under \u201cAccessibility\u201d)." },
+      { icon: "gear", text: "Tap \u201cFont size\u201d or \u201cDisplay size.\u201d" },
+      { icon: "gear", text: "Move the slider to make text bigger, then tap out or press back to save." }
+    ]
+  },
+  {
+    id: "video-call",
+    title: "Start a Video Call",
+    icon: "video",
+    steps: [
+      { icon: "video", text: "Open your video calling app (FaceTime on iPhone, or Google Duo/Meet on Android)." },
+      { icon: "video", text: "Tap the button to start a \u201cNew\u201d call." },
+      { icon: "video", text: "Type the person's name, phone number, or email address." },
+      { icon: "video", text: "Tap their name when it pops up." },
+      { icon: "video", text: "Tap the green video call button and wait for them to answer." }
+    ]
+  },
+  {
+    id: "send-photo",
+    title: "Send a Photo by Text Message",
+    icon: "camera",
+    steps: [
+      { icon: "message", text: "Open your Messages (texting) app." },
+      { icon: "message", text: "Open your conversation with the person you want to text." },
+      { icon: "camera", text: "Tap the plus (+) or photo icon near the message box." },
+      { icon: "camera", text: "Choose the photo you want to send." },
+      { icon: "message", text: "Tap the blue or green send arrow." }
+    ]
+  },
+  {
+    id: "wifi",
+    title: "Connect to Wi-Fi",
+    icon: "wifi",
+    steps: [
+      { icon: "gear", text: "Open Settings." },
+      { icon: "wifi", text: "Tap \u201cWi-Fi.\u201d" },
+      { icon: "wifi", text: "Make sure the Wi-Fi switch is turned on (green)." },
+      { icon: "wifi", text: "Tap the name of your Wi-Fi network from the list." },
+      { icon: "wifi", text: "Type the password if it asks for one, then tap \u201cJoin\u201d or \u201cConnect.\u201d" },
+      { icon: "wifi", text: "Look for a checkmark next to the network name — that means you're connected!" }
+    ]
+  },
+  {
+    id: "volume",
+    title: "Make Sounds Easier to Hear",
+    icon: "speaker",
+    steps: [
+      { icon: "speaker", text: "Press the volume button on the side of your phone to make sound louder." },
+      { icon: "gear", text: "For more options, open Settings and tap \u201cSounds\u201d or \u201cSound & Vibration.\u201d" },
+      { icon: "speaker", text: "Turn up \u201cRingtone and Alerts\u201d volume with the slider." },
+      { icon: "gear", text: "You can also turn on \u201cHearing Aid\u201d or \u201cMono Audio\u201d features under Accessibility settings if you use hearing aids." }
+    ]
+  },
+  {
+    id: "restart",
+    title: "Restart Your Phone When Something's Wrong",
+    icon: "power",
+    steps: [
+      { icon: "power", text: "If an app is frozen or your phone feels slow, a restart often fixes it." },
+      { icon: "power", text: "Press and hold the side (power) button for a few seconds." },
+      { icon: "power", text: "Slide or tap to turn the phone off, and wait about 15 seconds." },
+      { icon: "power", text: "Press and hold the power button again until the screen turns back on." }
+    ]
+  },
+  {
+    id: "photos-save",
+    title: "Take and Save a Photo",
+    icon: "camera",
+    steps: [
+      { icon: "camera", text: "Open the Camera app." },
+      { icon: "camera", text: "Point your phone at what you want to photograph." },
+      { icon: "camera", text: "Tap the round button to take the picture." },
+      { icon: "folder", text: "Your photo is saved automatically — find it in the Photos or Gallery app." }
+    ]
+  },
+  {
+    id: "email",
+    title: "Check Email and Reply",
+    icon: "mail",
+    steps: [
+      { icon: "mail", text: "Open your Mail or Gmail app." },
+      { icon: "mail", text: "Tap on a message to open and read it." },
+      { icon: "mail", text: "Tap the arrow icon (usually at the bottom) to reply." },
+      { icon: "mail", text: "Type your message, then tap \u201cSend.\u201d" }
+    ]
+  },
+  {
+    id: "scam-safety",
+    title: "Simple Scam Safety Tips",
+    icon: "shield",
+    steps: [
+      { icon: "shield", text: "Do not click links in messages from people or numbers you don't know." },
+      { icon: "shield", text: "Never share passwords or verification codes with anyone, even if they say they are from your bank or a tech company." },
+      { icon: "shield", text: "If a message says something is urgent, pause and ask a trusted person before doing anything." },
+      { icon: "shield", text: "Real banks and government agencies do not ask for sensitive info by text or email." },
+      { icon: "shield", text: "If something feels suspicious, don't respond — just delete it or ask Aiden or a family member." }
+    ]
+  }
+];
+
+/* Render the guide list as expandable cards with a "view pictures" button */
+const guideListEl = document.getElementById("guideList");
+guideListEl.innerHTML = GUIDES.map((g, i) => `
+  <details class="guide">
+    <summary>
+      <span class="guide-summary-row">
+        <span class="icon-badge" style="color:var(--teal);">${ICONS[g.icon]}</span>
+        <span>${g.title}</span>
+      </span>
+    </summary>
+    <ol>
+      ${g.steps.map(s => `<li>${s.text}</li>`).join("")}
+    </ol>
+    <div class="guide-actions">
+      <button class="button gold" onclick="openGuide('${g.id}')">View Big Step-by-Step Pictures</button>
+    </div>
+  </details>
+`).join("");
+
+/* =========================================================
+   Step-by-step picture modal logic
+   ========================================================= */
+let currentGuide = null;
+let currentStep = 0;
+
+const modal = document.getElementById("stepModal");
+const modalTitle = document.getElementById("modalGuideTitle");
+const modalText = document.getElementById("modalStepText");
+const modalIcon = document.getElementById("modalIconBig");
+const modalStepCount = document.getElementById("modalStepCount");
+const modalDots = document.getElementById("modalDots");
+const backBtn = document.getElementById("modalBackBtn");
+const nextBtn = document.getElementById("modalNextBtn");
+const doneBtn = document.getElementById("modalDoneBtn");
+
+function openGuide(id) {
+  currentGuide = GUIDES.find(g => g.id === id);
+  if (!currentGuide) return;
+  currentStep = 0;
+  renderStep();
+  modal.classList.add("open");
+  document.getElementById("modalCloseBtn").focus();
+}
+
+function closeGuide() {
+  modal.classList.remove("open");
+  currentGuide = null;
+}
+
+function renderStep() {
+  if (!currentGuide) return;
+  const step = currentGuide.steps[currentStep];
+  const total = currentGuide.steps.length;
+
+  modalTitle.textContent = currentGuide.title;
+  modalText.textContent = step.text;
+  modalIcon.innerHTML = ICONS[step.icon] || ICONS[currentGuide.icon];
+  modalIcon.style.color = "var(--teal)";
+  modalStepCount.textContent = `Step ${currentStep + 1} of ${total}`;
+
+  modalDots.innerHTML = currentGuide.steps.map((_, i) =>
+    `<span class="${i === currentStep ? 'active' : ''}"></span>`
+  ).join("");
+
+  backBtn.style.visibility = currentStep === 0 ? "hidden" : "visible";
+  const isLast = currentStep === total - 1;
+  nextBtn.style.display = isLast ? "none" : "inline-block";
+  doneBtn.style.display = isLast ? "inline-block" : "none";
+}
+
+backBtn.addEventListener("click", () => {
+  if (currentStep > 0) { currentStep--; renderStep(); }
+});
+nextBtn.addEventListener("click", () => {
+  if (currentGuide && currentStep < currentGuide.steps.length - 1) { currentStep++; renderStep(); }
+});
+doneBtn.addEventListener("click", closeGuide);
+document.getElementById("modalCloseBtn").addEventListener("click", closeGuide);
+modal.addEventListener("click", (e) => { if (e.target === modal) closeGuide(); });
+document.addEventListener("keydown", (e) => {
+  if (!modal.classList.contains("open")) return;
+  if (e.key === "Escape") closeGuide();
+  if (e.key === "ArrowRight") nextBtn.click();
+  if (e.key === "ArrowLeft") backBtn.click();
+});
+</script>
+
+</body>
+</html>
