@@ -1,2 +1,2 @@
 # .github.io
-Accessible, senior-friendly site for scheduling in-person tech help and requesting remote support (phone, video, text, email) — built for Atria Senior Living.
+Accessible, senior-friendly site for patient tech help and requesting remote support (phone, video, text, email) — to keep you connected to people who matter to you most.
