@@ -22,16 +22,65 @@
 <div class="container"><section class="page-head"><h2>Ask a Technology Question</h2>
 <p>Send a basic question and I will respond when available.</p></section>
 <section><div class="card">
-<p><strong>For now, help requests are handled by email.</strong></p>
-<p>Please include:</p><ul><li>Your name</li><li>Device type</li><li>A short description of the problem</li><li>Whether you are an Atria resident, family member, or community visitor</li></ul>
-<div class="buttons"><a class="btn green" href="mailto:seniorgeniusbar@gmail.com?subject=Senior%20Genius%20Bar%20Help%20Request&body=Name:%0ADevice:%0AAtria%20resident,%20family%20member,%20or%20community%20visitor:%0AQuestion:%0A">Email a Help Request</a></div>
+<p><strong>For now, help requests are handled by email.</strong> Fill in what you can below — when you tap the button, it will open your email app with everything already filled in, ready to send.</p>
+<form class="help-form" onsubmit="return false">
+<label>Your First Name
+<input type="text" id="hrName" placeholder="First name"></label>
+<label>Device Type
+<select id="hrDeviceType">
+<option value="">Choose one</option>
+<option>Phone</option>
+<option>Tablet</option>
+<option>Computer</option>
+<option>Other</option>
+</select></label>
+<label>Device Brand
+<select id="hrDeviceBrand">
+<option value="">Choose one</option>
+<option>Apple / Mac</option>
+<option>Android</option>
+<option>Windows / PC</option>
+<option>Other / Not sure</option>
+</select></label>
+<label>Model or Year (optional)
+<input type="text" id="hrDeviceDetails" placeholder="e.g. iPhone 13 — okay to leave blank"></label>
+<label>I am a...
+<select id="hrRole">
+<option value="">Choose one</option>
+<option>Family member</option>
+<option>Community visitor</option>
+<option>Atria resident</option>
+</select></label>
+<label>Your Question
+<textarea id="hrQuestion" rows="4" placeholder="Briefly describe what you need help with"></textarea></label>
+<button type="button" class="btn green" onclick="sendHelpRequest()">Email a Help Request</button>
+</form>
 <p class="note">Do not include passwords, banking information, medical information, Social Security numbers, or verification codes.</p>
 </div></section></div>
 </main>
 
 <footer><p><strong>Senior Genius Bar</strong></p>
-<p>Helping seniors feel more confident, connected, and safe with technology.</p>
+<p>Helping seniors stay connected to the people and moments that matter most.</p>
 <p><a href="mailto:seniorgeniusbar@gmail.com">seniorgeniusbar@gmail.com</a></p></footer>
 <script src="assets/site.js"></script>
+<script>
+function sendHelpRequest(){
+  const name = document.getElementById('hrName').value.trim() || '(not provided)';
+  const deviceType = document.getElementById('hrDeviceType').value || '(not provided)';
+  const deviceBrand = document.getElementById('hrDeviceBrand').value || '(not provided)';
+  const deviceDetails = document.getElementById('hrDeviceDetails').value.trim();
+  const role = document.getElementById('hrRole').value || '(not provided)';
+  const question = document.getElementById('hrQuestion').value.trim() || '(not provided)';
+  const deviceLine = deviceType + ' — ' + deviceBrand + (deviceDetails ? ' (' + deviceDetails + ')' : '');
+  const subject = encodeURIComponent('Senior Genius Bar Help Request');
+  const body = encodeURIComponent(
+    'Name: ' + name + '\n' +
+    'Device: ' + deviceLine + '\n' +
+    'I am a: ' + role + '\n' +
+    'Question: ' + question
+  );
+  window.location.href = 'mailto:seniorgeniusbar@gmail.com?subject=' + subject + '&body=' + body;
+}
+</script>
 
 </body></html>

@@ -1,8 +1,8 @@
 <!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Free Tech Guides | Senior Genius Bar</title>
-<meta name="description" content="Free step-by-step tech guides for seniors: make text bigger, start a FaceTime call, send photos, connect to Wi-Fi, avoid scams, and create strong passwords.">
+<meta name="description" content="Free illustrated picture guides for seniors: video calls, texting, email, photos, Wi-Fi, passwords, and spotting scams — every step shown in order.">
 <meta property="og:title" content="Free Tech Guides | Senior Genius Bar">
-<meta property="og:description" content="Free step-by-step tech guides for seniors: make text bigger, start a FaceTime call, send photos, connect to Wi-Fi, avoid scams, and create strong passwords.">
+<meta property="og:description" content="Free illustrated picture guides for seniors: video calls, texting, email, photos, Wi-Fi, passwords, and spotting scams — every step shown in order.">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://seniorgeniusbar.github.io/guides.html">
 <meta property="og:image" content="https://seniorgeniusbar.github.io/assets/aiden.png">
@@ -22,31 +22,37 @@
 <div class="container"><section class="page-head"><h2>Free Tech Guides</h2>
 <p>Simple instructions written for clarity and confidence.</p></section>
 <section><div class="card note">
-<p><strong>Tip:</strong> Tap any guide title below (the ones with the "Tap to Open" button) to see the steps. Can't find an app on your device? Swipe down or tap the search icon and type the app's name — that trick works for finding almost anything. And if any step below doesn't quite match what you see, that's okay, devices vary a little. Ask Aiden if you get stuck, any time.</p>
+<p><strong>Tip:</strong> Tap any picture below to see the steps one at a time, big on your screen. Can't find an app on your device? Swipe down or tap the search icon and type the app's name — that trick works for finding almost anything. And if any step below doesn't quite match what you see, that's okay, devices vary a little. Ask Aiden if you get stuck, any time.</p>
 </div></section>
 <section>
-<details><summary>How to Make Text Bigger on an iPhone</summary><ol>
-<li>Open <strong>Settings</strong>.</li><li>Tap <strong>Display & Brightness</strong>.</li><li>Tap <strong>Text Size</strong>.</li>
-<li>Move the slider to the right.</li><li>For even larger text, go to <strong>Settings → Accessibility → Display & Text Size</strong>.</li></ol></details>
-<details><summary>How to Start a FaceTime Call</summary><ol>
-<li>Open <strong>FaceTime</strong>.</li><li>Tap <strong>New FaceTime</strong>.</li><li>Enter the person's name, number, or email.</li>
-<li>Tap the person, then tap the green FaceTime button.</li></ol></details>
-<details><summary>How to Send a Photo by Text</summary><ol>
-<li>Open <strong>Messages</strong>.</li><li>Open the conversation.</li><li>Tap the plus sign or photo icon.</li><li>Select a photo.</li><li>Tap the blue send arrow.</li></ol></details>
-<details><summary>How to Connect to Wi‑Fi</summary><ol>
-<li>Open <strong>Settings</strong>.</li><li>Tap <strong>Wi‑Fi</strong>.</li><li>Turn Wi‑Fi on.</li><li>Tap the network name.</li><li>Enter the password if asked.</li></ol></details>
-<details><summary>Scam Protection Basics</summary><ul>
-<li>Do not click links from unknown senders.</li><li>Never share passwords or verification codes.</li>
-<li>Pause when a message creates urgency or fear.</li><li>Ask a trusted person before sending money or information.</li></ul></details>
-<details><summary>Password Tips</summary><ul>
-<li>Use a different password for important accounts.</li><li>Use long phrases that are easier to remember.</li>
-<li>Do not send passwords by email or text.</li><li>Turn on two-step verification when possible.</li></ul></details>
+<div class="eyebrow">Learn at your own pace</div>
+<h2 class="section-title">Simple Picture Guides</h2>
+<p style="text-align:center;max-width:720px;margin:0 auto">Every guide below shows each step in order, with a red circle showing exactly where to tap. Take your time — tap any picture to see it big on the screen, and you can go back and forth as many times as you like.</p>
+<div class="guides-grid" id="guideGrid"></div>
+<p style="text-align:center;margin-top:18px">Don't see what you're looking for? Don't worry — you can always <a href="request-help.html">send Aiden a question</a> and he'll get back to you.</p>
 </section></div>
 </main>
 
 <footer><p><strong>Senior Genius Bar</strong></p>
-<p>Helping seniors feel more confident, connected, and safe with technology.</p>
+<p>Helping seniors stay connected to the people and moments that matter most.</p>
 <p><a href="mailto:seniorgeniusbar@gmail.com">seniorgeniusbar@gmail.com</a></p></footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close">✕</button>
+    <h3 id="modalTitle"></h3>
+    <div id="modalSvgHolder"></div>
+    <p class="modal-caption" id="modalCaption"></p>
+    <div class="step-dots" id="stepDots"></div>
+    <div class="modal-nav">
+      <button id="btnBack" onclick="stepGuide(-1)">◀ Back</button>
+      <button onclick="speakCaption()">🔊 Read Aloud</button>
+      <button id="btnNext" class="primary" onclick="stepGuide(1)">Next ▶</button>
+    </div>
+  </div>
+</div>
+
 <script src="assets/site.js"></script>
+<script src="assets/guide-data.js"></script>
 
 </body></html>
