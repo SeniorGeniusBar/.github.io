@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /atria/
-
-Sitemap: https://seniorgeniusbar.github.io/sitemap.xml
