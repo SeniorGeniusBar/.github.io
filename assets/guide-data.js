@@ -113,6 +113,33 @@ function icoImage(cx,cy,scale=1,color='#fff'){
     <path d="M-11,6 L-2,-3 L4,3 L7,-1 L11,6 Z" fill="${color}"/>
   </g>`;
 }
+function icoClock(cx,cy,scale=1,color='#fff'){
+  return `<g transform="translate(${cx},${cy}) scale(${scale})">
+    <circle cx="0" cy="0" r="9" fill="none" stroke="${color}" stroke-width="2"/>
+    <line x1="0" y1="0" x2="0" y2="-5" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <line x1="0" y1="0" x2="4" y2="2" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+  </g>`;
+}
+function icoMic(cx,cy,scale=1,color='#fff'){
+  return `<g transform="translate(${cx},${cy}) scale(${scale})">
+    <rect x="-4" y="-9" width="8" height="14" rx="4" fill="${color}"/>
+    <path d="M-8,0 Q-8,8 0,8 Q8,8 8,0" fill="none" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <line x1="0" y1="8" x2="0" y2="12" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+    <line x1="-5" y1="12" x2="5" y2="12" stroke="${color}" stroke-width="2" stroke-linecap="round"/>
+  </g>`;
+}
+function icoMapPin(cx,cy,scale=1,color='#fff'){
+  return `<g transform="translate(${cx},${cy}) scale(${scale})">
+    <path d="M0,-9 C5,-9 8,-5 8,-1 C8,4 0,10 0,10 C0,10 -8,4 -8,-1 C-8,-5 -5,-9 0,-9 Z" fill="${color}"/>
+    <circle cx="0" cy="-1" r="3" fill="#173463"/>
+  </g>`;
+}
+function icoPower(cx,cy,scale=1,color='#fff'){
+  return `<g transform="translate(${cx},${cy}) scale(${scale})">
+    <line x1="0" y1="-9" x2="0" y2="-2" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>
+    <path d="M-6,-5 A9,9 0 1,0 6,-5" fill="none" stroke="${color}" stroke-width="2.4" stroke-linecap="round"/>
+  </g>`;
+}
 function searchFrame(iconFn, tileColor, label){
   // Every device has a search feature, and it's a far more reliable way to
   // find an app than hunting for an icon (which sits in a different spot
@@ -639,6 +666,219 @@ const guides = [
         <text x="150" y="200" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Green means notifications are turned on</text>
       `) }
     ]
+  },
+  {
+    title: "Answer or Decline a Phone Call",
+    summary: "Pick up when you want to talk, or send it to voicemail if it's not a good time.",
+    steps: [
+      { caption: "When someone calls, you'll see their name on the screen along with a green button and a red button.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        <circle cx="150" cy="150" r="50" fill="#8fa8cf"/>
+        <text x="150" y="230" fill="#fff" font-size="20" font-weight="700" text-anchor="middle" font-family="Arial">Incoming Call</text>
+        <text x="150" y="256" fill="#cdd7e6" font-size="16" text-anchor="middle" font-family="Arial">David</text>
+        <circle cx="90" cy="460" r="34" fill="#c62828" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(90,460,1.3,'#fff',135)}
+        <circle cx="210" cy="460" r="34" fill="#2e9e4f" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(210,460,1.3,'#fff',0)}
+        <text x="90" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Decline</text>
+        <text x="210" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Answer</text>
+      `) },
+      { caption: "To take the call, tap or slide the green button.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        <circle cx="150" cy="150" r="50" fill="#8fa8cf"/>
+        <text x="150" y="230" fill="#fff" font-size="20" font-weight="700" text-anchor="middle" font-family="Arial">Incoming Call</text>
+        <text x="150" y="256" fill="#cdd7e6" font-size="16" text-anchor="middle" font-family="Arial">David</text>
+        <circle cx="90" cy="460" r="34" fill="#c62828" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(90,460,1.3,'#fff',135)}
+        <circle cx="210" cy="460" r="34" fill="#2e9e4f" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(210,460,1.3,'#fff',0)}
+        <circle cx="210" cy="460" r="46" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="165" y1="410" x2="198" y2="440" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="90" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Decline</text>
+        <text x="210" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Answer</text>
+      `) },
+      { caption: "If it's not a good time, tap the red button instead — the call goes to voicemail, and they can leave you a message.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        <circle cx="150" cy="150" r="50" fill="#8fa8cf"/>
+        <text x="150" y="230" fill="#fff" font-size="20" font-weight="700" text-anchor="middle" font-family="Arial">Incoming Call</text>
+        <text x="150" y="256" fill="#cdd7e6" font-size="16" text-anchor="middle" font-family="Arial">David</text>
+        <circle cx="90" cy="460" r="34" fill="#c62828" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(90,460,1.3,'#fff',135)}
+        <circle cx="210" cy="460" r="34" fill="#2e9e4f" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(210,460,1.3,'#fff',0)}
+        <circle cx="90" cy="460" r="46" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="135" y1="410" x2="102" y2="440" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="90" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Decline</text>
+        <text x="210" y="510" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Answer</text>
+      `) }
+    ]
+  },
+  {
+    title: "Set a Reminder or Alarm",
+    summary: "Never forget an appointment or medicine time again.",
+    steps: [
+      { caption: "Swipe down or tap the search icon, then type \"Clock\" and tap the result to open it. Searching works for finding any app — and Aiden's always happy to help if you get stuck.",
+        img: searchFrame(icoClock, '#8a8f98', 'Clock') },
+      { caption: "Tap Alarm near the top, then tap the plus (+) button to add a new one.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="40" fill="#173463"/>
+        <text x="150" y="52" fill="#fff" font-size="20" font-weight="700" text-anchor="middle" font-family="Arial">Alarms</text>
+        <circle cx="255" cy="46" r="15" fill="#2e9e4f"/>
+        ${icoPlus(255,46,0.9)}
+        <circle cx="255" cy="46" r="26" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="205" y1="115" x2="238" y2="66" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="34" y="110" font-size="18" font-family="Arial" fill="#111">7:00 AM — Weekdays</text>
+        <text x="150" y="230" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Tap the + to add a new alarm</text>
+      `) },
+      { caption: "Set the time you want, then tap Save — your phone will ring at that time every day.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="40" fill="#173463"/>
+        <text x="150" y="52" fill="#fff" font-size="18" text-anchor="middle" font-family="Arial">New Alarm</text>
+        <text x="150" y="170" font-size="38" text-anchor="middle" font-family="Arial" fill="#111" font-weight="700">9:00 AM</text>
+        <rect x="86" y="470" width="128" height="40" rx="20" fill="#2e9e4f"/>
+        ${icoCheck(120,490,1)}
+        <text x="150" y="497" font-size="16" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">Save</text>
+        <circle cx="150" cy="490" r="46" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="150" y1="420" x2="150" y2="440" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="150" y="400" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Set the time, then tap Save</text>
+      `) }
+    ]
+  },
+  {
+    title: "Join a Zoom Video Call",
+    summary: "Join a video call for a class, church service, or family gathering with one tap.",
+    steps: [
+      { caption: "You'll usually get a link by text or email, like this one. Just tap the blue link to join — there's no need to type anything.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#f4f6fa"/>
+        <rect x="30" y="80" width="240" height="70" rx="10" fill="#fff" stroke="#98a2b3" stroke-width="1.5"/>
+        <text x="42" y="105" font-size="13" font-family="Arial" fill="#333">Join us for the family call:</text>
+        <text x="42" y="128" font-size="13" font-family="Arial" fill="#2456a6" text-decoration="underline">zoom.us/j/123456789</text>
+        <rect x="36" y="118" width="180" height="18" fill="none" stroke="#c62828" stroke-width="3" rx="4"/>
+        <line x1="150" y1="200" x2="126" y2="150" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="150" y="230" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Tap the blue link to join — no typing needed</text>
+      `) },
+      { caption: "If asked, tap \"Join with Video\" and \"Join with Audio\" so the others on the call can see and hear you.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        <text x="150" y="90" fill="#fff" font-size="18" font-weight="700" text-anchor="middle" font-family="Arial">Ready to join?</text>
+        <rect x="60" y="150" width="180" height="44" rx="22" fill="#2456a6"/>
+        <text x="150" y="177" font-size="15" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">Join with Video</text>
+        <rect x="60" y="210" width="180" height="44" rx="22" fill="#2e9e4f"/>
+        <text x="150" y="237" font-size="15" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">Join with Audio</text>
+        <circle cx="150" cy="172" r="55" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="150" y1="120" x2="150" y2="145" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="150" y="290" font-size="13" text-anchor="middle" fill="#cdd7e6" font-family="Arial">Tap both so others can see and hear you</text>
+      `) },
+      { caption: "That's it — you're in the meeting! Tap the red button anytime you're ready to leave.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        <rect x="34" y="50" width="232" height="360" rx="10" fill="#1a3a63"/>
+        <circle cx="150" cy="200" r="50" fill="#8fa8cf"/>
+        <text x="150" y="420" fill="#cdd7e6" font-size="13" text-anchor="middle" font-family="Arial">You're in the meeting</text>
+        <circle cx="150" cy="470" r="30" fill="#c62828" stroke="#fff" stroke-width="4"/>
+        ${icoPhoneHandset(150,470,1.1,'#fff',135)}
+        <text x="150" y="522" fill="#fff" font-size="13" text-anchor="middle" font-family="Arial">Tap the red button anytime to leave</text>
+      `) }
+    ]
+  },
+  {
+    title: "Use Voice Typing Instead of Typing",
+    summary: "Speak your message out loud and let your phone type it for you.",
+    steps: [
+      { caption: "When you see a keyboard, look for the small microphone icon, usually near the spacebar.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#fff"/>
+        <rect x="30" y="440" width="240" height="70" rx="8" fill="#eee"/>
+        <text x="40" y="465" font-size="15" font-family="Arial" fill="#888">Type your message</text>
+        <circle cx="245" cy="475" r="16" fill="#2456a6"/>
+        ${icoMic(245,475,0.9)}
+        <circle cx="245" cy="475" r="26" fill="none" stroke="#c62828" stroke-width="4"/>
+        <line x1="200" y1="410" x2="230" y2="452" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="150" y="390" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Look for the small microphone icon</text>
+      `) },
+      { caption: "Tap the microphone and start speaking clearly. Your words appear as text right on the screen.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#fff"/>
+        <rect x="30" y="440" width="240" height="70" rx="8" fill="#eef2f9" stroke="#2456a6" stroke-width="1.5"/>
+        <text x="42" y="465" font-size="14" font-family="Arial" fill="#173463">Listening…</text>
+        <circle cx="245" cy="475" r="16" fill="#c62828"/>
+        ${icoMic(245,475,0.9)}
+        <line x1="60" y1="480" x2="60" y2="465" stroke="#2456a6" stroke-width="3" stroke-linecap="round"/>
+        <line x1="75" y1="485" x2="75" y2="460" stroke="#2456a6" stroke-width="3" stroke-linecap="round"/>
+        <line x1="90" y1="480" x2="90" y2="470" stroke="#2456a6" stroke-width="3" stroke-linecap="round"/>
+        <text x="150" y="400" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Speak clearly — your words appear as text</text>
+      `) },
+      { caption: "Tap the text box when you're done to go back to typing, then send your message as usual.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#fff"/>
+        <rect x="30" y="440" width="240" height="70" rx="8" fill="#eee"/>
+        <text x="40" y="465" font-size="14" font-family="Arial" fill="#111">Hi Susan, see you Saturday!</text>
+        <circle cx="245" cy="475" r="16" fill="#2e9e4f"/>
+        ${icoSendArrow(245,475,0.8)}
+        <circle cx="245" cy="475" r="26" fill="none" stroke="#c62828" stroke-width="4"/>
+        <text x="150" y="400" font-size="13" text-anchor="middle" fill="#555" font-family="Arial">Tap the box to type more, or send as usual</text>
+      `) }
+    ]
+  },
+  {
+    title: "Restart Your Device",
+    summary: "A simple trick that fixes many problems — try this first when something isn't working right.",
+    steps: [
+      { caption: "Press and hold the side (power) button for a few seconds until you see a slider or a power symbol appear.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#f4f6fa"/>
+        <rect x="18" y="26" width="264" height="508" fill="#ffffff" opacity="0.5"/>
+        <rect x="292" y="120" width="10" height="60" rx="4" fill="#d4a24a"/>
+        <circle cx="297" cy="150" r="26" fill="none" stroke="#c62828" stroke-width="4"/>
+        <text x="150" y="330" font-size="16" font-weight="700" text-anchor="middle" font-family="Arial" fill="#173463">Press and Hold the Side Button</text>
+        <text x="150" y="356" font-size="13" text-anchor="middle" font-family="Arial" fill="#555">for a few seconds</text>
+      `) },
+      { caption: "Slide the power symbol (or tap Restart), then wait about 30 seconds while your device turns off and back on.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#0b2340"/>
+        ${icoPower(150,150,2.4,'#fff')}
+        <rect x="70" y="220" width="160" height="44" rx="22" fill="#3a5a8a"/>
+        <circle cx="90" cy="242" r="18" fill="#fff"/>
+        <text x="160" y="248" font-size="14" text-anchor="middle" fill="#cdd7e6" font-family="Arial">slide to power off</text>
+        <circle cx="150" cy="242" r="46" fill="none" stroke="#c62828" stroke-width="4"/>
+        <text x="150" y="320" font-size="13" text-anchor="middle" fill="#cdd7e6" font-family="Arial">Slide across, then wait about 30 seconds</text>
+      `) },
+      { caption: "That's it — many small problems, like a frozen screen or an app acting strange, are fixed simply by restarting.",
+        img: confirmFrame("All Done!", ["Your device restarted —", "many small problems are now fixed."]) }
+    ]
+  },
+  {
+    title: "Get Directions with Maps",
+    summary: "Find your way somewhere new, with turn-by-turn directions read out loud.",
+    steps: [
+      { caption: "Swipe down or tap the search icon, then type \"Maps\" and tap the result to open it. Searching works for finding any app — and Aiden's always happy to help if you get stuck.",
+        img: searchFrame(icoMapPin, '#2e9e4f', 'Maps') },
+      { caption: "Tap the search bar at the top and type where you want to go — a store name, address, or \"Dr. Smith's office\" all work.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#eaf3e6"/>
+        <rect x="34" y="46" width="232" height="40" rx="20" fill="#fff" stroke="#98a2b3" stroke-width="1.6"/>
+        <circle cx="56" cy="66" r="7" fill="none" stroke="#555" stroke-width="2"/>
+        <line x1="61" y1="71" x2="66" y2="76" stroke="#555" stroke-width="2" stroke-linecap="round"/>
+        <text x="78" y="72" font-size="14" font-family="Arial" fill="#888">Search for a place</text>
+        <rect x="34" y="46" width="232" height="40" fill="none" stroke="#c62828" stroke-width="4" rx="20"/>
+        <line x1="150" y1="140" x2="150" y2="96" stroke="#c62828" stroke-width="3" marker-end="url(#arrow)"/>
+        <text x="150" y="170" font-size="13" text-anchor="middle" fill="#333" font-family="Arial">Type a store, address, or name</text>
+      `) },
+      { caption: "Tap Start — your phone will read the directions out loud as you drive or walk.",
+        img: phoneFrame(`
+        <rect x="18" y="26" width="264" height="508" fill="#eaf3e6"/>
+        <rect x="34" y="380" width="232" height="120" rx="14" fill="#fff"/>
+        <text x="150" y="410" font-size="15" font-weight="700" text-anchor="middle" font-family="Arial" fill="#111">12 minutes away</text>
+        <rect x="70" y="425" width="160" height="42" rx="21" fill="#2456a6"/>
+        <text x="150" y="451" font-size="15" font-weight="700" text-anchor="middle" fill="#fff" font-family="Arial">Start</text>
+        <circle cx="150" cy="446" r="50" fill="none" stroke="#c62828" stroke-width="4"/>
+        <text x="150" y="500" font-size="13" text-anchor="middle" fill="#333" font-family="Arial">Tap Start — directions are read aloud as you go</text>
+      `) }
+    ]
   }
 ];
 let currentGuide = 0, currentStep = 0;
@@ -664,7 +904,10 @@ function openModal(idx, stepIdx){
   document.getElementById('modalBackdrop').classList.add('open');
   renderModal();
 }
-function closeModal(){ document.getElementById('modalBackdrop').classList.remove('open'); }
+function closeModal(){
+  document.getElementById('modalBackdrop').classList.remove('open');
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
+}
 function renderModal(){
   const g = guides[currentGuide];
   const step = g.steps[currentStep];
@@ -676,18 +919,58 @@ function renderModal(){
   document.getElementById('btnNext').textContent = currentStep === g.steps.length-1 ? 'Done ✓' : 'Next ▶';
 }
 function stepGuide(dir){
+  if('speechSynthesis' in window) window.speechSynthesis.cancel();
   const g = guides[currentGuide];
   if(dir>0 && currentStep === g.steps.length-1){ closeModal(); return; }
   currentStep = Math.min(g.steps.length-1, Math.max(0, currentStep+dir));
   renderModal();
 }
+/* ---- Read Aloud voice selection ----
+   Chrome/Safari often default to a flat, robotic voice unless we pick one
+   explicitly. This looks for the warmest, most natural-sounding English
+   voice the browser/OS makes available, and falls back gracefully if
+   nothing better is found. Voices can load asynchronously, so we cache
+   the choice and refresh it if the browser reports the list has changed. */
+let cachedVoice = null;
+function pickReadAloudVoice(){
+  if(!('speechSynthesis' in window)) return null;
+  const voices = window.speechSynthesis.getVoices();
+  if(!voices.length) return null;
+  const preferredNames = [
+    'Google US English',
+    'Samantha',
+    'Microsoft Aria Online (Natural)',
+    'Microsoft Jenny Online (Natural)',
+    'Microsoft Guy Online (Natural)',
+    'Alex',
+    'Google UK English Female'
+  ];
+  for(const name of preferredNames){
+    const match = voices.find(v => v.name === name);
+    if(match) return match;
+  }
+  const enhanced = voices.find(v => /^en/i.test(v.lang) && /natural|enhanced|premium/i.test(v.name));
+  if(enhanced) return enhanced;
+  const english = voices.find(v => /^en/i.test(v.lang));
+  if(english) return english;
+  return voices[0];
+}
+if('speechSynthesis' in window){
+  window.speechSynthesis.onvoiceschanged = () => { cachedVoice = pickReadAloudVoice(); };
+  cachedVoice = pickReadAloudVoice();
+}
 function speakCaption(){
   if(!('speechSynthesis' in window)) return;
+  window.speechSynthesis.cancel(); // stop any previous line so taps never overlap
   const g = guides[currentGuide];
   const step = g.steps[currentStep];
   const text = g.steps.length > 1 ? `Step ${currentStep+1} of ${g.steps.length}. ${step.caption}` : step.caption;
   const u = new SpeechSynthesisUtterance(text);
-  u.rate = 0.9;
+  const voice = cachedVoice || pickReadAloudVoice();
+  if(voice) u.voice = voice;
+  u.lang = (voice && voice.lang) || 'en-US';
+  u.rate = 0.92;
+  u.pitch = 1.02;
   window.speechSynthesis.speak(u);
 }
 function printGuide(idx){
