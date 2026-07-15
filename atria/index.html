@@ -18,16 +18,10 @@
 <div class="container"><section class="page-head"><span class="badge">For Atria residents and families only</span>
 <h2>Atria Resident Support</h2><p>Upcoming in-person technology help sessions.</p></section>
 <section><div class="card notice">
-<!-- ===================== UPDATE HERE =====================
-Change only the dates, times, and location below.
-========================================================= -->
 <h2 class="section-title">Next Help Sessions</h2>
-<p><strong>Location:</strong> The Parlor</p>
-<div class="session-grid">
-<div class="session"><strong>Saturday, July 11</strong><span>1:00 PM – 1:30 PM</span></div>
-<div class="session"><strong>Saturday, July 18</strong><span>1:00 PM – 1:30 PM</span></div>
-</div>
-<p><strong>Bring:</strong> your phone, tablet, laptop, charger, and questions.</p>
+<p><strong>Location:</strong> <span id="sessionLocation"></span></p>
+<div class="session-grid" id="sessionGrid"></div>
+<p><strong>Bring:</strong> <span id="sessionBring"></span></p>
 </div></section>
 <section><div class="grid">
 <div class="tile"><h3>At the Session</h3><p>Get help with FaceTime, texting, photos, email, Wi‑Fi, accessibility settings, and basic troubleshooting.</p></div>
@@ -48,5 +42,13 @@ Change only the dates, times, and location below.
 <p>Helping seniors stay connected to the people and moments that matter most.</p>
 <p><a href="mailto:seniorgeniusbar@gmail.com">seniorgeniusbar@gmail.com</a></p></footer>
 <script src="../assets/site.js"></script>
+<script src="../assets/session-dates.js"></script>
+<script>
+document.getElementById('sessionLocation').textContent = sessionInfo.location;
+document.getElementById('sessionBring').textContent = sessionInfo.bring;
+document.getElementById('sessionGrid').innerHTML = sessionInfo.sessions.map(s =>
+  '<div class="session"><strong>' + s.date + '</strong><span>' + s.time + '</span></div>'
+).join('');
+</script>
 
 </body></html>
