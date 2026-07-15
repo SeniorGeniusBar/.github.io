@@ -40,6 +40,7 @@ h2.section-title{text-align:center;color:var(--navy);font-size:clamp(30px,4vw,40
 .tile h3{color:var(--navy);margin:0 0 8px;font-size:calc(23px * var(--font-scale))}
 a.tile:hover,a.tile:focus{box-shadow:0 8px 20px rgba(0,0,0,.12);transform:translateY(-2px)}
 a.tile p{color:var(--text);font-weight:400}
+.tile-cta{color:var(--navy) !important;font-weight:700 !important;margin-top:10px !important}
 .notice{background:#fff4dc;border:3px solid var(--gold);text-align:center}
 .badge{display:inline-block;background:var(--green);color:#fff;padding:7px 12px;border-radius:999px;font-weight:700}
 .session-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-top:16px}
@@ -129,6 +130,7 @@ body.contrast .tile{background:#111;border-color:#555}
 body.contrast .tile h3{color:#ffd166}
 body.contrast a.tile{color:#f5f5f5}
 body.contrast a.tile p{color:#e5e5e5}
+body.contrast .tile-cta{color:#9fc4ff !important}
 body.contrast a.tile:hover,body.contrast a.tile:focus{box-shadow:0 0 0 2px #ffd166}
 body.contrast .notice{background:#1a1400;border-color:#ffd166}
 body.contrast .badge{background:#5ec98d;color:#04150c}
